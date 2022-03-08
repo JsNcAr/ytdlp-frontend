@@ -1,0 +1,1 @@
+yt-dlp "https://www.youtube.com/watch?v=od8YbI9NJ2E" -i --add-metadata --embed-thumbnail -x --audio-format mp3

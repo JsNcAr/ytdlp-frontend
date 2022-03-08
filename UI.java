@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import javax.swing.*;  
 import java.awt.event.*;
 import java.awt.Font;
@@ -128,7 +130,18 @@ public class UI extends JFrame implements ActionListener{
         // System.out.println("extractAudio" + extractAudio);
         // System.out.println("audioFormat" + audioFormat);
         // System.out.println("videoFormat" + videoFormat);
-        System.out.println(Generator.getString(url, ignoreErrors, metadata, thumbnail, sponsors, archiveLinks, extractVideo, extractAudio, audioFormat, videoFormat));
-        JOptionPane.showMessageDialog(this,"Copied to clipboard.");
+        String command = Generator.getString(url, ignoreErrors, metadata, thumbnail, sponsors, archiveLinks, extractVideo, extractAudio, audioFormat, videoFormat);
+        System.out.println(command);
+
+        String dir = System.getProperty("user.dir");
+        try{
+            FileGenerator.write(command);
+            Runtime.getRuntime().exec(dir+"/command.sh");
+            System.out.println("Successfully executed");
+        } catch (IOException er) {
+            System.out.println("An error occurred.");
+            er.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(this,"Download started.");
     }
 }
